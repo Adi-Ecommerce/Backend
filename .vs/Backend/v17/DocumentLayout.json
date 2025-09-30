@@ -1,0 +1,261 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\USER\\Desktop\\Shopping Cart\\Backend\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A19B9B96-8769-4C8B-8FA1-A0A84BB264FF}|Backend.csproj|c:\\users\\user\\desktop\\shopping cart\\backend\\model\\entities\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A19B9B96-8769-4C8B-8FA1-A0A84BB264FF}|Backend.csproj|solutionrelative:model\\entities\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A19B9B96-8769-4C8B-8FA1-A0A84BB264FF}|Backend.csproj|c:\\users\\user\\desktop\\shopping cart\\backend\\migrations\\20250930091122_name.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A19B9B96-8769-4C8B-8FA1-A0A84BB264FF}|Backend.csproj|solutionrelative:migrations\\20250930091122_name.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A19B9B96-8769-4C8B-8FA1-A0A84BB264FF}|Backend.csproj|c:\\users\\user\\desktop\\shopping cart\\backend\\model\\dtos\\registeruserdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A19B9B96-8769-4C8B-8FA1-A0A84BB264FF}|Backend.csproj|solutionrelative:model\\dtos\\registeruserdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A19B9B96-8769-4C8B-8FA1-A0A84BB264FF}|Backend.csproj|c:\\users\\user\\desktop\\shopping cart\\backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A19B9B96-8769-4C8B-8FA1-A0A84BB264FF}|Backend.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A19B9B96-8769-4C8B-8FA1-A0A84BB264FF}|Backend.csproj|c:\\users\\user\\desktop\\shopping cart\\backend\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A19B9B96-8769-4C8B-8FA1-A0A84BB264FF}|Backend.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A19B9B96-8769-4C8B-8FA1-A0A84BB264FF}|Backend.csproj|c:\\users\\user\\desktop\\shopping cart\\backend\\data\\authdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A19B9B96-8769-4C8B-8FA1-A0A84BB264FF}|Backend.csproj|solutionrelative:data\\authdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A19B9B96-8769-4C8B-8FA1-A0A84BB264FF}|Backend.csproj|c:\\users\\user\\desktop\\shopping cart\\backend\\model\\dtos\\productdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A19B9B96-8769-4C8B-8FA1-A0A84BB264FF}|Backend.csproj|solutionrelative:model\\dtos\\productdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A19B9B96-8769-4C8B-8FA1-A0A84BB264FF}|Backend.csproj|c:\\users\\user\\desktop\\shopping cart\\backend\\model\\dtos\\loginuserdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A19B9B96-8769-4C8B-8FA1-A0A84BB264FF}|Backend.csproj|solutionrelative:model\\dtos\\loginuserdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A19B9B96-8769-4C8B-8FA1-A0A84BB264FF}|Backend.csproj|c:\\users\\user\\desktop\\shopping cart\\backend\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A19B9B96-8769-4C8B-8FA1-A0A84BB264FF}|Backend.csproj|solutionrelative:controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A19B9B96-8769-4C8B-8FA1-A0A84BB264FF}|Backend.csproj|c:\\users\\user\\desktop\\shopping cart\\backend\\controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A19B9B96-8769-4C8B-8FA1-A0A84BB264FF}|Backend.csproj|solutionrelative:controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A19B9B96-8769-4C8B-8FA1-A0A84BB264FF}|Backend.csproj|c:\\users\\user\\desktop\\shopping cart\\backend\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A19B9B96-8769-4C8B-8FA1-A0A84BB264FF}|Backend.csproj|solutionrelative:controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A19B9B96-8769-4C8B-8FA1-A0A84BB264FF}|Backend.csproj|c:\\users\\user\\desktop\\shopping cart\\backend\\controllers\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A19B9B96-8769-4C8B-8FA1-A0A84BB264FF}|Backend.csproj|solutionrelative:controllers\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A19B9B96-8769-4C8B-8FA1-A0A84BB264FF}|Backend.csproj|c:\\users\\user\\desktop\\shopping cart\\backend\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A19B9B96-8769-4C8B-8FA1-A0A84BB264FF}|Backend.csproj|solutionrelative:properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A19B9B96-8769-4C8B-8FA1-A0A84BB264FF}|Backend.csproj|c:\\users\\user\\desktop\\shopping cart\\backend\\model\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A19B9B96-8769-4C8B-8FA1-A0A84BB264FF}|Backend.csproj|solutionrelative:model\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A19B9B96-8769-4C8B-8FA1-A0A84BB264FF}|Backend.csproj|c:\\users\\user\\desktop\\shopping cart\\backend\\model\\entities\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A19B9B96-8769-4C8B-8FA1-A0A84BB264FF}|Backend.csproj|solutionrelative:model\\entities\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "20250930091122_name.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\Desktop\\Shopping Cart\\Backend\\Migrations\\20250930091122_name.cs",
+              "RelativeDocumentMoniker": "Migrations\\20250930091122_name.cs",
+              "ToolTip": "C:\\Users\\USER\\Desktop\\Shopping Cart\\Backend\\Migrations\\20250930091122_name.cs",
+              "RelativeToolTip": "Migrations\\20250930091122_name.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADUAAABYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-30T09:11:22.77Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "RegisterUserDto.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\Desktop\\Shopping Cart\\Backend\\Model\\DTOs\\RegisterUserDto.cs",
+              "RelativeDocumentMoniker": "Model\\DTOs\\RegisterUserDto.cs",
+              "ToolTip": "C:\\Users\\USER\\Desktop\\Shopping Cart\\Backend\\Model\\DTOs\\RegisterUserDto.cs",
+              "RelativeToolTip": "Model\\DTOs\\RegisterUserDto.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAA8AAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-29T20:29:47.469Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Product.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\Desktop\\Shopping Cart\\Backend\\Model\\Entities\\Product.cs",
+              "RelativeDocumentMoniker": "Model\\Entities\\Product.cs",
+              "ToolTip": "C:\\Users\\USER\\Desktop\\Shopping Cart\\Backend\\Model\\Entities\\Product.cs",
+              "RelativeToolTip": "Model\\Entities\\Product.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAQwBkAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-29T20:28:29.948Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "AuthDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\Desktop\\Shopping Cart\\Backend\\Data\\AuthDbContext.cs",
+              "RelativeDocumentMoniker": "Data\\AuthDbContext.cs",
+              "ToolTip": "C:\\Users\\USER\\Desktop\\Shopping Cart\\Backend\\Data\\AuthDbContext.cs",
+              "RelativeToolTip": "Data\\AuthDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-29T20:04:06.021Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\USER\\Desktop\\Shopping Cart\\Backend\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "C:\\Users\\USER\\Desktop\\Shopping Cart\\Backend\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-09-29T19:57:12.164Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\Desktop\\Shopping Cart\\Backend\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\USER\\Desktop\\Shopping Cart\\Backend\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAswB4AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-29T18:13:27.601Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ProductDto.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\Desktop\\Shopping Cart\\Backend\\Model\\DTOs\\ProductDto.cs",
+              "RelativeDocumentMoniker": "Model\\DTOs\\ProductDto.cs",
+              "ToolTip": "C:\\Users\\USER\\Desktop\\Shopping Cart\\Backend\\Model\\DTOs\\ProductDto.cs",
+              "RelativeToolTip": "Model\\DTOs\\ProductDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-29T20:31:20.162Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "LoginUserDto.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\Desktop\\Shopping Cart\\Backend\\Model\\DTOs\\LoginUserDto.cs",
+              "RelativeDocumentMoniker": "Model\\DTOs\\LoginUserDto.cs",
+              "ToolTip": "C:\\Users\\USER\\Desktop\\Shopping Cart\\Backend\\Model\\DTOs\\LoginUserDto.cs",
+              "RelativeToolTip": "Model\\DTOs\\LoginUserDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-29T20:29:17.407Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "UserController.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\Desktop\\Shopping Cart\\Backend\\Controllers\\UserController.cs",
+              "RelativeDocumentMoniker": "Controllers\\UserController.cs",
+              "ToolTip": "C:\\Users\\USER\\Desktop\\Shopping Cart\\Backend\\Controllers\\UserController.cs",
+              "RelativeToolTip": "Controllers\\UserController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-29T19:59:39.864Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "WeatherForecastController.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\Desktop\\Shopping Cart\\Backend\\Controllers\\WeatherForecastController.cs",
+              "RelativeDocumentMoniker": "Controllers\\WeatherForecastController.cs",
+              "ToolTip": "C:\\Users\\USER\\Desktop\\Shopping Cart\\Backend\\Controllers\\WeatherForecastController.cs",
+              "RelativeToolTip": "Controllers\\WeatherForecastController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-30T09:06:40.895Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "ProductController.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\Desktop\\Shopping Cart\\Backend\\Controllers\\ProductController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ProductController.cs",
+              "ToolTip": "C:\\Users\\USER\\Desktop\\Shopping Cart\\Backend\\Controllers\\ProductController.cs",
+              "RelativeToolTip": "Controllers\\ProductController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGUAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-29T20:01:53.922Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "CategoryController.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\Desktop\\Shopping Cart\\Backend\\Controllers\\CategoryController.cs",
+              "RelativeDocumentMoniker": "Controllers\\CategoryController.cs",
+              "ToolTip": "C:\\Users\\USER\\Desktop\\Shopping Cart\\Backend\\Controllers\\CategoryController.cs",
+              "RelativeToolTip": "Controllers\\CategoryController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAD0AAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-30T07:21:08.564Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "C:\\Users\\USER\\Desktop\\Shopping Cart\\Backend\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "Properties\\launchSettings.json",
+              "ToolTip": "C:\\Users\\USER\\Desktop\\Shopping Cart\\Backend\\Properties\\launchSettings.json",
+              "RelativeToolTip": "Properties\\launchSettings.json",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAsAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-09-30T08:10:37.439Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\Desktop\\Shopping Cart\\Backend\\Model\\Entities\\User.cs",
+              "RelativeDocumentMoniker": "Model\\Entities\\User.cs",
+              "ToolTip": "C:\\Users\\USER\\Desktop\\Shopping Cart\\Backend\\Model\\Entities\\User.cs",
+              "RelativeToolTip": "Model\\Entities\\User.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAgwB0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-29T20:28:09.002Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Category.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\Desktop\\Shopping Cart\\Backend\\Model\\Entities\\Category.cs",
+              "RelativeDocumentMoniker": "Model\\Entities\\Category.cs",
+              "ToolTip": "C:\\Users\\USER\\Desktop\\Shopping Cart\\Backend\\Model\\Entities\\Category.cs",
+              "RelativeToolTip": "Model\\Entities\\Category.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-30T07:23:26.632Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
