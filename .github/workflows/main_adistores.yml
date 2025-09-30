@@ -52,4 +52,4 @@ jobs:
           app-name: 'adiStores'
           slot-name: 'Production'
           package: .
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_68CBBC96DBD643588E8C1D44466817FA }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_6CB96904F9D14BD6BE63A76C69EAFCC5 }}
