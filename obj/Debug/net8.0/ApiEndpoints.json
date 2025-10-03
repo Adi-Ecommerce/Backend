@@ -21,29 +21,19 @@
   },
   {
     "ContainingType": "Backend.Controllers.CategoryController",
-    "Method": "PostCategory",
+    "Method": "PostCategories",
     "RelativePath": "api/Category",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "category",
-        "Type": "Backend.Model.Entities.Category",
+        "Name": "body",
+        "Type": "System.Object",
         "IsRequired": true
       }
     ],
-    "ReturnTypes": [
-      {
-        "Type": "Backend.Model.Entities.Category",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
+    "ReturnTypes": []
   },
   {
     "ContainingType": "Backend.Controllers.CategoryController",

@@ -5211,11 +5211,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\USER\\Desktop\\Shopping Cart\\Backend\\Backend.csproj",
+      "projectUniqueName": "C:\\Users\\USER\\Documents\\Ecommerce\\Backend\\Backend.csproj",
       "projectName": "Backend",
-      "projectPath": "C:\\Users\\USER\\Desktop\\Shopping Cart\\Backend\\Backend.csproj",
+      "projectPath": "C:\\Users\\USER\\Documents\\Ecommerce\\Backend\\Backend.csproj",
       "packagesPath": "C:\\Users\\USER\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\USER\\Desktop\\Shopping Cart\\Backend\\obj\\",
+      "outputPath": "C:\\Users\\USER\\Documents\\Ecommerce\\Backend\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

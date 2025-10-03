@@ -20,7 +20,9 @@ namespace Backend.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Category>>> GetCategories()
         {
-            return await _context.Categories.Include(c => c.Products).ToListAsync();
+            return await _context.Categories
+                                 .Include(c => c.Products)
+                                 .ToListAsync();
         }
 
         // GET: api/Category/5
@@ -28,8 +30,8 @@ namespace Backend.Controllers
         public async Task<ActionResult<Category>> GetCategory(int id)
         {
             var category = await _context.Categories
-                .Include(c => c.Products)
-                .FirstOrDefaultAsync(c => c.Id == id);
+                                         .Include(c => c.Products)
+                                         .FirstOrDefaultAsync(c => c.Id == id);
 
             if (category == null)
                 return NotFound();
@@ -38,13 +40,50 @@ namespace Backend.Controllers
         }
 
         // POST: api/Category
+        // Supports single or bulk insertion
         [HttpPost]
-        public async Task<ActionResult<Category>> PostCategory(Category category)
+        public async Task<IActionResult> PostCategories([FromBody] object body)
         {
-            _context.Categories.Add(category);
-            await _context.SaveChangesAsync();
+            if (body == null)
+                return BadRequest("No category data provided.");
 
-            return CreatedAtAction(nameof(GetCategory), new { id = category.Id }, category);
+            try
+            {
+                // Try single Category
+                var singleCategory = System.Text.Json.JsonSerializer.Deserialize<Category>(
+                    body.ToString(),
+                    new System.Text.Json.JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+                if (singleCategory != null && !string.IsNullOrWhiteSpace(singleCategory.Name))
+                {
+                    singleCategory.Id = 0; // EF Core auto generates ID
+                    _context.Categories.Add(singleCategory);
+                    await _context.SaveChangesAsync();
+
+                    return CreatedAtAction(nameof(GetCategory), new { id = singleCategory.Id }, singleCategory);
+                }
+            }
+            catch { }
+
+            try
+            {
+                // Try list of Categories
+                var categoryList = System.Text.Json.JsonSerializer.Deserialize<List<Category>>(
+                    body.ToString(),
+                    new System.Text.Json.JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+                if (categoryList != null && categoryList.Any())
+                {
+                    categoryList.ForEach(c => c.Id = 0);
+                    _context.Categories.AddRange(categoryList);
+                    await _context.SaveChangesAsync();
+
+                    return Ok(categoryList);
+                }
+            }
+            catch { }
+
+            return BadRequest("Invalid category format. Must be a single object or an array of objects.");
         }
 
         // PUT: api/Category/5
