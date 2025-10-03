@@ -209,6 +209,32 @@
   },
   {
     "ContainingType": "Backend.Controllers.ProductController",
+    "Method": "AddMultipleProducts",
+    "RelativePath": "api/Product/bulk",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "products",
+        "Type": "System.Collections.Generic.List\u00601[[Backend.Model.Entities.Product, Backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[Backend.Model.Entities.Product, Backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Backend.Controllers.ProductController",
     "Method": "GetProductsByCategory",
     "RelativePath": "api/Product/by-category/{categoryId}",
     "HttpMethod": "GET",

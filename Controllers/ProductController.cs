@@ -51,10 +51,35 @@ namespace Backend.Controllers
         [HttpPost]
         public async Task<ActionResult<Product>> AddNewProduct(Product product)
         {
+            // Validate and assign category
+            var result = await ValidateAndAssignCategory(product);
+            if (result is BadRequestObjectResult badRequest) return badRequest;
+
             _context.Products.Add(product);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetProduct), new { id = product.Id }, product);
+        }
+
+        // POST Bulk Products - api/Product/bulk
+        [HttpPost("bulk")]
+        public async Task<ActionResult<IEnumerable<Product>>> AddMultipleProducts(List<Product> products)
+        {
+            var validatedProducts = new List<Product>();
+
+            foreach (var product in products)
+            {
+                var result = await ValidateAndAssignCategory(product);
+                if (result is BadRequestObjectResult badRequest)
+                    return badRequest;
+
+                validatedProducts.Add(product);
+            }
+
+            await _context.Products.AddRangeAsync(validatedProducts);
+            await _context.SaveChangesAsync();
+
+            return Ok(validatedProducts);
         }
 
         // PUT: api/Product/5
@@ -62,7 +87,11 @@ namespace Backend.Controllers
         public async Task<IActionResult> UpdateProduct(int id, Product product)
         {
             if (id != product.Id)
-                return BadRequest();
+                return BadRequest("Product ID mismatch.");
+
+            // Validate and assign category
+            var result = await ValidateAndAssignCategory(product);
+            if (result is BadRequestObjectResult badRequest) return badRequest;
 
             _context.Entry(product).State = EntityState.Modified;
 
@@ -97,6 +126,36 @@ namespace Backend.Controllers
         private bool ProductExists(int id)
         {
             return _context.Products.Any(e => e.Id == id);
+        }
+
+        /// <summary>
+        /// Validates category info from the product object and assigns CategoryId.
+        /// </summary>
+        private async Task<IActionResult?> ValidateAndAssignCategory(Product product)
+        {
+            if (product.CategoryId > 0)
+            {
+                var category = await _context.Categories.FindAsync(product.CategoryId);
+                if (category == null)
+                    return BadRequest("Category not found. Please provide a valid CategoryId.");
+            }
+            else if (product.Category != null && !string.IsNullOrWhiteSpace(product.Category.Name))
+            {
+                var category = await _context.Categories
+                    .FirstOrDefaultAsync(c => c.Name.ToLower() == product.Category.Name.ToLower());
+
+                if (category == null)
+                    return BadRequest($"Category '{product.Category.Name}' not found. Please provide a valid Category.");
+
+                product.CategoryId = category.Id;
+                product.Category = null; // Prevent EF from trying to insert a new category
+            }
+            else
+            {
+                return BadRequest("Product must include a valid CategoryId or Category Name.");
+            }
+
+            return null;
         }
     }
 }
