@@ -343,3 +343,6 @@ C:\Users\USER\Documents\Ecommerce\Backend\obj\Debug\net8.0\refint\Backend.dll
 C:\Users\USER\Documents\Ecommerce\Backend\obj\Debug\net8.0\Backend.pdb
 C:\Users\USER\Documents\Ecommerce\Backend\obj\Debug\net8.0\Backend.genruntimeconfig.cache
 C:\Users\USER\Documents\Ecommerce\Backend\obj\Debug\net8.0\ref\Backend.dll
+C:\Users\USER\Documents\Ecommerce\Backend\bin\Debug\net8.0\JWT.dll
+C:\Users\USER\Documents\Ecommerce\Backend\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\USER\Documents\Ecommerce\Backend\bin\Debug\net8.0\Newtonsoft.Json.dll

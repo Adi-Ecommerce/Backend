@@ -1,9 +1,8 @@
-﻿
-using Backend.Data;
+﻿using Backend.Data;
 using Backend.Model.Entities;
 using Backend.Model.DTOs;
+using Backend.Services;
 using Microsoft.AspNetCore.Mvc;
-using BCrypt.Net;
 using System.Linq;
 
 namespace Backend.Controllers
@@ -13,10 +12,12 @@ namespace Backend.Controllers
     public class UsersController : ControllerBase
     {
         private readonly AuthDbContext _context;
+        private readonly JwtService _jwtService;
 
-        public UsersController(AuthDbContext context)
+        public UsersController(AuthDbContext context, JwtService jwtService)
         {
             _context = context;
+            _jwtService = jwtService;
         }
 
         // REGISTER
@@ -39,7 +40,6 @@ namespace Backend.Controllers
             _context.Users.Add(user);
             _context.SaveChanges();
 
-
             return Ok(new { message = "User registered successfully!" });
         }
 
@@ -47,23 +47,26 @@ namespace Backend.Controllers
         [HttpPost("login")]
         public IActionResult Login(LoginUserDto dto)
         {
-            // 1. Find user by email
             var user = _context.Users.SingleOrDefault(u => u.Email == dto.Email);
             if (user == null)
             {
                 return Unauthorized(new { message = "Invalid email or password" });
             }
 
-            // 2. Verify password
             bool isPasswordValid = BCrypt.Net.BCrypt.Verify(dto.Password, user.PasswordHash);
             if (!isPasswordValid)
             {
                 return Unauthorized(new { message = "Invalid email or password" });
             }
 
-            // 3. Return success
-            return Ok(new { message = "Login successful!" });
+            // Generate JWT
+            var token = _jwtService.GenerateToken(user);
+
+            return Ok(new
+            {
+                message = "Login successful!",
+                token = token
+            });
         }
     }
 }
-
