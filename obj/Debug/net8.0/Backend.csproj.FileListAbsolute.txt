@@ -182,6 +182,8 @@ C:\Users\USER\Documents\Ecommerce\Backend\bin\Debug\net8.0\Azure.Core.dll
 C:\Users\USER\Documents\Ecommerce\Backend\bin\Debug\net8.0\Azure.Identity.dll
 C:\Users\USER\Documents\Ecommerce\Backend\bin\Debug\net8.0\BCrypt.Net-Next.dll
 C:\Users\USER\Documents\Ecommerce\Backend\bin\Debug\net8.0\Humanizer.dll
+C:\Users\USER\Documents\Ecommerce\Backend\bin\Debug\net8.0\JWT.dll
+C:\Users\USER\Documents\Ecommerce\Backend\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\USER\Documents\Ecommerce\Backend\bin\Debug\net8.0\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\USER\Documents\Ecommerce\Backend\bin\Debug\net8.0\Microsoft.Build.Locator.dll
 C:\Users\USER\Documents\Ecommerce\Backend\bin\Debug\net8.0\Microsoft.CodeAnalysis.dll
@@ -218,6 +220,7 @@ C:\Users\USER\Documents\Ecommerce\Backend\bin\Debug\net8.0\Microsoft.OpenApi.dll
 C:\Users\USER\Documents\Ecommerce\Backend\bin\Debug\net8.0\Microsoft.SqlServer.Server.dll
 C:\Users\USER\Documents\Ecommerce\Backend\bin\Debug\net8.0\Microsoft.Win32.SystemEvents.dll
 C:\Users\USER\Documents\Ecommerce\Backend\bin\Debug\net8.0\Mono.TextTemplating.dll
+C:\Users\USER\Documents\Ecommerce\Backend\bin\Debug\net8.0\Newtonsoft.Json.dll
 C:\Users\USER\Documents\Ecommerce\Backend\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\USER\Documents\Ecommerce\Backend\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\USER\Documents\Ecommerce\Backend\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
@@ -343,6 +346,3 @@ C:\Users\USER\Documents\Ecommerce\Backend\obj\Debug\net8.0\refint\Backend.dll
 C:\Users\USER\Documents\Ecommerce\Backend\obj\Debug\net8.0\Backend.pdb
 C:\Users\USER\Documents\Ecommerce\Backend\obj\Debug\net8.0\Backend.genruntimeconfig.cache
 C:\Users\USER\Documents\Ecommerce\Backend\obj\Debug\net8.0\ref\Backend.dll
-C:\Users\USER\Documents\Ecommerce\Backend\bin\Debug\net8.0\JWT.dll
-C:\Users\USER\Documents\Ecommerce\Backend\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
-C:\Users\USER\Documents\Ecommerce\Backend\bin\Debug\net8.0\Newtonsoft.Json.dll
