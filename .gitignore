@@ -1,0 +1,41 @@
+# === .NET / ASP.NET Core ===
+bin/
+obj/
+*.db
+*.db-shm
+*.db-wal
+
+# User secrets and environment files
+secrets.json
+.env
+appsettings.Development.json  # contains dev-only keys, optional
+appsettings.Local.json
+appsettings.*.local.json
+
+# === Visual Studio & VS Code ===
+.vscode/
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# === Build / Publish ===
+/publish/
+/out/
+/dist/
+/logs/
+
+# === OS / Editor ===
+.DS_Store
+Thumbs.db
+*.swp
+*.tmp
+
+# === Backup & Misc ===
+*.bak
+*.log
+
+# === IDE-specific (JetBrains Rider) ===
+.idea/
+*.iml

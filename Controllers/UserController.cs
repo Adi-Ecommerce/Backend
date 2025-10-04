@@ -20,10 +20,13 @@ namespace Backend.Controllers
             _jwtService = jwtService;
         }
 
-        // REGISTER
+        // ✅ REGISTER
         [HttpPost("register")]
         public IActionResult Register(RegisterUserDto dto)
         {
+            if (_context.Users.Any(u => u.Email == dto.Email))
+                return BadRequest(new { message = "Email already exists" });
+
             string passwordHash = BCrypt.Net.BCrypt.HashPassword(dto.Password);
 
             var user = new User
@@ -40,24 +43,34 @@ namespace Backend.Controllers
             _context.Users.Add(user);
             _context.SaveChanges();
 
-            return Ok(new { message = "User registered successfully!" });
+            // 🔑 Optional: auto-generate token right after registration
+            var token = _jwtService.GenerateToken(user);
+
+            return Ok(new
+            {
+                message = "User registered successfully!",
+                user = new
+                {
+                    user.Id,
+                    user.FirstName,
+                    user.LastName,
+                    user.Email
+                },
+                token
+            });
         }
 
-        // LOGIN
+        //  LOGIN
         [HttpPost("login")]
         public IActionResult Login(LoginUserDto dto)
         {
             var user = _context.Users.SingleOrDefault(u => u.Email == dto.Email);
             if (user == null)
-            {
                 return Unauthorized(new { message = "Invalid email or password" });
-            }
 
             bool isPasswordValid = BCrypt.Net.BCrypt.Verify(dto.Password, user.PasswordHash);
             if (!isPasswordValid)
-            {
                 return Unauthorized(new { message = "Invalid email or password" });
-            }
 
             // Generate JWT
             var token = _jwtService.GenerateToken(user);
@@ -65,7 +78,14 @@ namespace Backend.Controllers
             return Ok(new
             {
                 message = "Login successful!",
-                token = token
+                token,
+                user = new
+                {
+                    user.Id,
+                    user.FirstName,
+                    user.LastName,
+                    user.Email
+                }
             });
         }
     }
