@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Backend.Data;
 using Backend.Model.Entities;
+using Backend.Model.DTOs;
 
 namespace Backend.Controllers
 {
@@ -18,16 +19,35 @@ namespace Backend.Controllers
 
         // GET: api/Category
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Category>>> GetCategories()
+        public async Task<ActionResult<IEnumerable<CategoryDto>>> GetCategories()
         {
-            return await _context.Categories
-                                 .Include(c => c.Products)
-                                 .ToListAsync();
+            var categories = await _context.Categories
+                                           .Include(c => c.Products)
+                                           .ToListAsync();
+
+            var categoryDtos = categories.Select(c => new CategoryDto
+            {
+                Id = c.Id,
+                Name = c.Name,
+                Description = c.Description,
+                Products = c.Products?.Select(p => new ProductDto
+                {
+                    Id = p.Id,
+                    Name = p.Name,
+                    Price = p.Price,
+                    Description = p.Description,
+                    Image = p.Image,
+                    StockQuantity = p.StockQuantity,
+                    CategoryId = p.CategoryId
+                }).ToList()
+            }).ToList();
+
+            return Ok(categoryDtos);
         }
 
         // GET: api/Category/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Category>> GetCategory(int id)
+        public async Task<ActionResult<CategoryDto>> GetCategory(int id)
         {
             var category = await _context.Categories
                                          .Include(c => c.Products)
@@ -36,11 +56,27 @@ namespace Backend.Controllers
             if (category == null)
                 return NotFound();
 
-            return category;
+            var categoryDto = new CategoryDto
+            {
+                Id = category.Id,
+                Name = category.Name,
+                Description = category.Description,
+                Products = category.Products?.Select(p => new ProductDto
+                {
+                    Id = p.Id,
+                    Name = p.Name,
+                    Price = p.Price,
+                    Description = p.Description,
+                    Image = p.Image,
+                    StockQuantity = p.StockQuantity,
+                    CategoryId = p.CategoryId
+                }).ToList()
+            };
+
+            return Ok(categoryDto);
         }
 
         // POST: api/Category
-        // Supports single or bulk insertion
         [HttpPost]
         public async Task<IActionResult> PostCategories([FromBody] object body)
         {
@@ -49,36 +85,61 @@ namespace Backend.Controllers
 
             try
             {
-                // Try single Category
-                var singleCategory = System.Text.Json.JsonSerializer.Deserialize<Category>(
+                // Try to deserialize into a single CategoryDto
+                var singleCategory = System.Text.Json.JsonSerializer.Deserialize<CategoryDto>(
                     body.ToString(),
                     new System.Text.Json.JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
                 if (singleCategory != null && !string.IsNullOrWhiteSpace(singleCategory.Name))
                 {
-                    singleCategory.Id = 0; // EF Core auto generates ID
-                    _context.Categories.Add(singleCategory);
+                    var category = new Category
+                    {
+                        Name = singleCategory.Name,
+                        Description = singleCategory.Description
+                    };
+
+                    _context.Categories.Add(category);
                     await _context.SaveChangesAsync();
 
-                    return CreatedAtAction(nameof(GetCategory), new { id = singleCategory.Id }, singleCategory);
+                    // Return the created category as a DTO
+                    var createdCategoryDto = new CategoryDto
+                    {
+                        Id = category.Id,
+                        Name = category.Name,
+                        Description = category.Description
+                    };
+
+                    return CreatedAtAction(nameof(GetCategory), new { id = category.Id }, createdCategoryDto);
                 }
             }
             catch { }
 
             try
             {
-                // Try list of Categories
-                var categoryList = System.Text.Json.JsonSerializer.Deserialize<List<Category>>(
+                // Try to deserialize into a list of CategoryDto
+                var categoryList = System.Text.Json.JsonSerializer.Deserialize<List<CategoryDto>>(
                     body.ToString(),
                     new System.Text.Json.JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
                 if (categoryList != null && categoryList.Any())
                 {
-                    categoryList.ForEach(c => c.Id = 0);
-                    _context.Categories.AddRange(categoryList);
+                    var categories = categoryList.Select(c => new Category
+                    {
+                        Name = c.Name,
+                        Description = c.Description
+                    }).ToList();
+
+                    _context.Categories.AddRange(categories);
                     await _context.SaveChangesAsync();
 
-                    return Ok(categoryList);
+                    var createdDtos = categories.Select(c => new CategoryDto
+                    {
+                        Id = c.Id,
+                        Name = c.Name,
+                        Description = c.Description
+                    }).ToList();
+
+                    return Ok(createdDtos);
                 }
             }
             catch { }
@@ -88,23 +149,20 @@ namespace Backend.Controllers
 
         // PUT: api/Category/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateCategory(int id, Category category)
+        public async Task<IActionResult> UpdateCategory(int id, [FromBody] CategoryDto dto)
         {
-            if (id != category.Id)
-                return BadRequest();
+            if (dto == null || id != dto.Id)
+                return BadRequest("Invalid request data.");
+
+            var category = await _context.Categories.FindAsync(id);
+            if (category == null)
+                return NotFound();
+
+            category.Name = dto.Name;
+            category.Description = dto.Description;
 
             _context.Entry(category).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CategoryExists(id))
-                    return NotFound();
-                throw;
-            }
+            await _context.SaveChangesAsync();
 
             return NoContent();
         }
@@ -121,11 +179,6 @@ namespace Backend.Controllers
             await _context.SaveChangesAsync();
 
             return NoContent();
-        }
-
-        private bool CategoryExists(int id)
-        {
-            return _context.Categories.Any(e => e.Id == id);
         }
     }
 }

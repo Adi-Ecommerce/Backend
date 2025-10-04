@@ -1,5 +1,5 @@
 ﻿using Backend.Data;
-using Backend.Services; 
+using Backend.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -7,8 +7,14 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add controllers
-builder.Services.AddControllers();
+// Add controllers with JSON options (prevents circular reference issues)
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+        options.JsonSerializerOptions.WriteIndented = true; // optional, makes JSON output pretty
+    });
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -55,9 +61,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-// Order matters 
-app.UseAuthentication(); // first
-app.UseAuthorization();  // then
+// Middleware order matters
+app.UseAuthentication(); // must come before UseAuthorization
+app.UseAuthorization();
 
 app.MapControllers();
 
