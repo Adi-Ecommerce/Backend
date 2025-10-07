@@ -9,7 +9,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[Backend.Model.Entities.Category, Backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[Backend.Model.DTOs.CategoryDto, Backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -51,7 +51,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "Backend.Model.Entities.Category",
+        "Type": "Backend.Model.DTOs.CategoryDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -75,8 +75,8 @@
         "IsRequired": true
       },
       {
-        "Name": "category",
-        "Type": "Backend.Model.Entities.Category",
+        "Name": "dto",
+        "Type": "Backend.Model.DTOs.CategoryDto",
         "IsRequired": true
       }
     ],
@@ -108,7 +108,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[Backend.Model.Entities.Product, Backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[Product, Backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -128,13 +128,13 @@
     "Parameters": [
       {
         "Name": "product",
-        "Type": "Backend.Model.Entities.Product",
+        "Type": "Product",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "Backend.Model.Entities.Product",
+        "Type": "Product",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -160,7 +160,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "Backend.Model.Entities.Product",
+        "Type": "Product",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -185,7 +185,7 @@
       },
       {
         "Name": "product",
-        "Type": "Backend.Model.Entities.Product",
+        "Type": "Product",
         "IsRequired": true
       }
     ],
@@ -217,13 +217,13 @@
     "Parameters": [
       {
         "Name": "products",
-        "Type": "System.Collections.Generic.List\u00601[[Backend.Model.Entities.Product, Backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.List\u00601[[Product, Backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[Backend.Model.Entities.Product, Backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[Product, Backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -249,7 +249,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[Backend.Model.Entities.Product, Backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[Product, Backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
