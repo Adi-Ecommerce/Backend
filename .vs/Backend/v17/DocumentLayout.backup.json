@@ -7,16 +7,24 @@
       "RelativeMoniker": "D:0:0:{A19B9B96-8769-4C8B-8FA1-A0A84BB264FF}|Backend.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A19B9B96-8769-4C8B-8FA1-A0A84BB264FF}|Backend.csproj|c:\\users\\user\\documents\\ecommerce\\backend\\.dockerignore||{3B902123-F8A7-4915-9F01-361F908088D0}",
-      "RelativeMoniker": "D:0:0:{A19B9B96-8769-4C8B-8FA1-A0A84BB264FF}|Backend.csproj|solutionrelative:.dockerignore||{3B902123-F8A7-4915-9F01-361F908088D0}"
+      "AbsoluteMoniker": "D:0:0:{A19B9B96-8769-4C8B-8FA1-A0A84BB264FF}|Backend.csproj|c:\\users\\user\\documents\\ecommerce\\backend\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A19B9B96-8769-4C8B-8FA1-A0A84BB264FF}|Backend.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A19B9B96-8769-4C8B-8FA1-A0A84BB264FF}|Backend.csproj|c:\\users\\user\\documents\\ecommerce\\backend\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A19B9B96-8769-4C8B-8FA1-A0A84BB264FF}|Backend.csproj|solutionrelative:properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A19B9B96-8769-4C8B-8FA1-A0A84BB264FF}|Backend.csproj|c:\\users\\user\\documents\\ecommerce\\backend\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}",
       "RelativeMoniker": "D:0:0:{A19B9B96-8769-4C8B-8FA1-A0A84BB264FF}|Backend.csproj|solutionrelative:dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A19B9B96-8769-4C8B-8FA1-A0A84BB264FF}|Backend.csproj|c:\\users\\user\\documents\\ecommerce\\backend\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{A19B9B96-8769-4C8B-8FA1-A0A84BB264FF}|Backend.csproj|solutionrelative:properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{A19B9B96-8769-4C8B-8FA1-A0A84BB264FF}|Backend.csproj|c:\\users\\user\\documents\\ecommerce\\backend\\controllers\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A19B9B96-8769-4C8B-8FA1-A0A84BB264FF}|Backend.csproj|solutionrelative:controllers\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A19B9B96-8769-4C8B-8FA1-A0A84BB264FF}|Backend.csproj|c:\\users\\user\\documents\\ecommerce\\backend\\.dockerignore||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A19B9B96-8769-4C8B-8FA1-A0A84BB264FF}|Backend.csproj|solutionrelative:.dockerignore||{3B902123-F8A7-4915-9F01-361F908088D0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A19B9B96-8769-4C8B-8FA1-A0A84BB264FF}|Backend.csproj|c:\\users\\user\\documents\\ecommerce\\backend\\migrations\\20251004143613_updatecategoryandproduct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -37,14 +45,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{A19B9B96-8769-4C8B-8FA1-A0A84BB264FF}|Backend.csproj|c:\\users\\user\\documents\\ecommerce\\backend\\model\\dtos\\categorydto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A19B9B96-8769-4C8B-8FA1-A0A84BB264FF}|Backend.csproj|solutionrelative:model\\dtos\\categorydto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A19B9B96-8769-4C8B-8FA1-A0A84BB264FF}|Backend.csproj|c:\\users\\user\\documents\\ecommerce\\backend\\controllers\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A19B9B96-8769-4C8B-8FA1-A0A84BB264FF}|Backend.csproj|solutionrelative:controllers\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A19B9B96-8769-4C8B-8FA1-A0A84BB264FF}|Backend.csproj|c:\\users\\user\\documents\\ecommerce\\backend\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{A19B9B96-8769-4C8B-8FA1-A0A84BB264FF}|Backend.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A19B9B96-8769-4C8B-8FA1-A0A84BB264FF}|Backend.csproj|c:\\users\\user\\documents\\ecommerce\\backend\\services\\jwtservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -102,11 +102,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "Dockerfile",
               "DocumentMoniker": "C:\\Users\\USER\\Documents\\Ecommerce\\Backend\\Dockerfile",
               "RelativeDocumentMoniker": "Dockerfile",
@@ -116,18 +116,6 @@
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
               "WhenOpened": "2025-10-07T08:16:18.713Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "CategoryDto.cs",
-              "DocumentMoniker": "C:\\Users\\USER\\Documents\\Ecommerce\\Backend\\Model\\DTOs\\CategoryDto.cs",
-              "RelativeDocumentMoniker": "Model\\DTOs\\CategoryDto.cs",
-              "ToolTip": "C:\\Users\\USER\\Documents\\Ecommerce\\Backend\\Model\\DTOs\\CategoryDto.cs",
-              "RelativeToolTip": "Model\\DTOs\\CategoryDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-04T14:26:57.142Z"
             },
             {
               "$type": "Document",
@@ -143,7 +131,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 4,
               "Title": "CategoryController.cs",
               "DocumentMoniker": "C:\\Users\\USER\\Documents\\Ecommerce\\Backend\\Controllers\\CategoryController.cs",
               "RelativeDocumentMoniker": "Controllers\\CategoryController.cs",
@@ -151,7 +139,8 @@
               "RelativeToolTip": "Controllers\\CategoryController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAALcAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-30T07:21:08.564Z"
+              "WhenOpened": "2025-09-30T07:21:08.564Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -161,20 +150,20 @@
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "C:\\Users\\USER\\Documents\\Ecommerce\\Backend\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAF0AAAAKAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-29T18:13:27.601Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "launchSettings.json",
               "DocumentMoniker": "C:\\Users\\USER\\Documents\\Ecommerce\\Backend\\Properties\\launchSettings.json",
               "RelativeDocumentMoniker": "Properties\\launchSettings.json",
               "ToolTip": "C:\\Users\\USER\\Documents\\Ecommerce\\Backend\\Properties\\launchSettings.json",
               "RelativeToolTip": "Properties\\launchSettings.json",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAQwCkAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAACkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2025-09-30T08:10:37.439Z",
               "EditorCaption": ""
@@ -182,6 +171,31 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\USER\\Documents\\Ecommerce\\Backend\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "C:\\Users\\USER\\Documents\\Ecommerce\\Backend\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAABGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-09-29T19:57:12.164Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "CategoryDto.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\Documents\\Ecommerce\\Backend\\Model\\DTOs\\CategoryDto.cs",
+              "RelativeDocumentMoniker": "Model\\DTOs\\CategoryDto.cs",
+              "ToolTip": "C:\\Users\\USER\\Documents\\Ecommerce\\Backend\\Model\\DTOs\\CategoryDto.cs",
+              "RelativeToolTip": "Model\\DTOs\\CategoryDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-04T14:26:57.142Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": ".dockerignore",
               "DocumentMoniker": "C:\\Users\\USER\\Documents\\Ecommerce\\Backend\\.dockerignore",
               "RelativeDocumentMoniker": ".dockerignore",
@@ -189,12 +203,11 @@
               "RelativeToolTip": ".dockerignore",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-10-07T08:24:38.5Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-07T08:24:38.5Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "20251004143613_updatecategoryandproduct.cs",
               "DocumentMoniker": "C:\\Users\\USER\\Documents\\Ecommerce\\Backend\\Migrations\\20251004143613_updatecategoryandproduct.cs",
               "RelativeDocumentMoniker": "Migrations\\20251004143613_updatecategoryandproduct.cs",
@@ -206,7 +219,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 9,
               "Title": "ProductDto.cs",
               "DocumentMoniker": "C:\\Users\\USER\\Documents\\Ecommerce\\Backend\\Model\\DTOs\\ProductDto.cs",
               "RelativeDocumentMoniker": "Model\\DTOs\\ProductDto.cs",
@@ -218,7 +231,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 7,
               "Title": "Product.cs",
               "DocumentMoniker": "C:\\Users\\USER\\Documents\\Ecommerce\\Backend\\Model\\Entities\\Product.cs",
               "RelativeDocumentMoniker": "Model\\Entities\\Product.cs",
@@ -230,7 +243,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 8,
               "Title": "Category.cs",
               "DocumentMoniker": "C:\\Users\\USER\\Documents\\Ecommerce\\Backend\\Model\\Entities\\Category.cs",
               "RelativeDocumentMoniker": "Model\\Entities\\Category.cs",
@@ -239,18 +252,6 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAuwAcAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-30T07:23:26.632Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\USER\\Documents\\Ecommerce\\Backend\\appsettings.json",
-              "RelativeDocumentMoniker": "appsettings.json",
-              "ToolTip": "C:\\Users\\USER\\Documents\\Ecommerce\\Backend\\appsettings.json",
-              "RelativeToolTip": "appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAABGAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-09-29T19:57:12.164Z"
             },
             {
               "$type": "Document",

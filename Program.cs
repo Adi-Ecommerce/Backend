@@ -7,16 +7,16 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// ✅ Set port for deployment (Render, Docker, etc.)
+// ✅ Set port for Docker or cloud environments
 var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
 builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
 
-// ✅ Add controllers with JSON options (prevents circular reference issues)
+// ✅ Add controllers with JSON options
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
         options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
-        options.JsonSerializerOptions.WriteIndented = true; // optional: makes JSON output pretty
+        options.JsonSerializerOptions.WriteIndented = true;
     });
 
 builder.Services.AddEndpointsApiExplorer();
@@ -60,8 +60,8 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowFrontend", policy =>
     {
         policy.WithOrigins(
-            "https://adi-stores.vercel.app",  // deployed frontend
-            "http://localhost:5173"           // local dev frontend
+            "https://adi-stores.vercel.app",
+            "http://localhost:5173"
         )
         .AllowAnyHeader()
         .AllowAnyMethod()
@@ -71,24 +71,19 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-// ✅ Enable Swagger in Development
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+// ✅ Always enable Swagger (even in Production)
+app.UseSwagger();
+app.UseSwaggerUI();
 
-app.UseHttpsRedirection();
-
-// ✅ Enable CORS before authentication
-app.UseCors("AllowFrontend");
+// ✅ Redirect root ("/") to Swagger automatically
+app.MapGet("/", () => Results.Redirect("/swagger"));
 
 // ✅ Middleware order matters
+app.UseHttpsRedirection();
+app.UseCors("AllowFrontend");
 app.UseAuthentication();
 app.UseAuthorization();
-
-// ✅ Map Controllers
 app.MapControllers();
 
-// ✅ Run the application
+// ✅ Run the app
 app.Run();
