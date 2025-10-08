@@ -6,29 +6,30 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// ✅ Set port for deployment (Render, Docker, etc.)
 var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
 builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
 
-// Add controllers with JSON options (prevents circular reference issues)
+// ✅ Add controllers with JSON options (prevents circular reference issues)
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
         options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
-        options.JsonSerializerOptions.WriteIndented = true; // optional, makes JSON output pretty
+        options.JsonSerializerOptions.WriteIndented = true; // optional: makes JSON output pretty
     });
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddControllers();
 
-// Register DbContext
+// ✅ Register DbContext
 builder.Services.AddDbContext<AuthDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// Register JwtService
+// ✅ Register JwtService
 builder.Services.AddScoped<JwtService>();
 
-// Configure JWT Authentication
+// ✅ Configure JWT Authentication
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -50,12 +51,27 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
-// Add Authorization
+// ✅ Add Authorization
 builder.Services.AddAuthorization();
+
+// ✅ Add CORS Policy
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend", policy =>
+    {
+        policy.WithOrigins(
+            "https://adi-stores.vercel.app",  // deployed frontend
+            "http://localhost:5173"           // local dev frontend
+        )
+        .AllowAnyHeader()
+        .AllowAnyMethod()
+        .AllowCredentials();
+    });
+});
 
 var app = builder.Build();
 
-// Swagger UI for development
+// ✅ Enable Swagger in Development
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -64,10 +80,15 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-// Middleware order matters
-app.UseAuthentication(); // must come before UseAuthorization
+// ✅ Enable CORS before authentication
+app.UseCors("AllowFrontend");
+
+// ✅ Middleware order matters
+app.UseAuthentication();
 app.UseAuthorization();
 
+// ✅ Map Controllers
 app.MapControllers();
 
+// ✅ Run the application
 app.Run();

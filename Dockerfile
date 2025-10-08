@@ -1,4 +1,4 @@
-# Use the official .NET 8 SDK image to build the app
+﻿# Use the official .NET 8 SDK image to build the app
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
@@ -15,8 +15,11 @@ FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
 COPY --from=build /app/publish .
 
-# Expose port
+# ✅ Set environment for Swagger
+ENV ASPNETCORE_ENVIRONMENT=Development
+
+# ✅ Expose the port your app runs on
 EXPOSE 8080
 
-# Run the app
-ENTRYPOINT ["dotnet", "Backend.dll"]                                                                                           
+# ✅ Run the app
+ENTRYPOINT ["dotnet", "Backend.dll"]
