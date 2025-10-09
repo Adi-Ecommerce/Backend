@@ -7,11 +7,16 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// ✅ Set port for Docker or cloud environments
-var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
-builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
+// ✅ Detect if running inside Docker
+var isDocker = Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER") == "true";
 
-// ✅ Add controllers with JSON options
+if (isDocker)
+{
+    var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
+    builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
+}
+
+// ✅ Add Controllers and configure JSON options
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
@@ -19,14 +24,15 @@ builder.Services.AddControllers()
         options.JsonSerializerOptions.WriteIndented = true;
     });
 
+// ✅ Swagger configuration
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// ✅ Register DbContext
+// ✅ Database connection
 builder.Services.AddDbContext<AuthDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// ✅ Register JwtService
+// ✅ JWT service
 builder.Services.AddScoped<JwtService>();
 
 // ✅ Configure JWT Authentication
@@ -43,7 +49,6 @@ builder.Services.AddAuthentication(options =>
         ValidateAudience = true,
         ValidateLifetime = true,
         ValidateIssuerSigningKey = true,
-
         ValidIssuer = builder.Configuration["Jwt:Issuer"],
         ValidAudience = builder.Configuration["Jwt:Audience"],
         IssuerSigningKey = new SymmetricSecurityKey(
@@ -51,10 +56,10 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
-// ✅ Add Authorization
+// ✅ Authorization
 builder.Services.AddAuthorization();
 
-// ✅ Add CORS Policy
+// ✅ CORS
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
@@ -71,19 +76,34 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-// ✅ Always enable Swagger (even in Production)
-app.UseSwagger();
-app.UseSwaggerUI();
+// ✅ Use developer-friendly error pages if in Dev or Docker
+if (app.Environment.IsDevelopment() || app.Environment.EnvironmentName == "Docker")
+{
+    app.UseDeveloperExceptionPage();
 
-// ✅ Redirect root ("/") to Swagger automatically
-app.MapGet("/", () => Results.Redirect("/swagger"));
+    // ✅ Enable Swagger only in Dev/Docker
+    app.UseSwagger();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "AdiStores API v1");
+        
+    });
+}
+else
+{
+    // Optional: still expose Swagger in Production if you want
+    // app.UseSwagger();
+    // app.UseSwaggerUI();
+}
 
-// ✅ Middleware order matters
+// ✅ Middleware order (IMPORTANT)
 app.UseHttpsRedirection();
 app.UseCors("AllowFrontend");
 app.UseAuthentication();
 app.UseAuthorization();
+
+// ✅ Controllers
 app.MapControllers();
 
-// ✅ Run the app
+// ✅ Run app (let Visual Studio or Docker decide the port)
 app.Run();

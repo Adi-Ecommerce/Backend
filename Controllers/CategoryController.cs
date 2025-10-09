@@ -30,6 +30,7 @@ namespace Backend.Controllers
                 Id = c.Id,
                 Name = c.Name,
                 Description = c.Description,
+                Image = c.Image,
                 Products = c.Products?.Select(p => new ProductDto
                 {
                     Id = p.Id,
@@ -61,6 +62,7 @@ namespace Backend.Controllers
                 Id = category.Id,
                 Name = category.Name,
                 Description = category.Description,
+                Image = category.Image,
                 Products = category.Products?.Select(p => new ProductDto
                 {
                     Id = p.Id,
@@ -85,7 +87,7 @@ namespace Backend.Controllers
 
             try
             {
-                // Try to deserialize into a single CategoryDto
+                // Try single category
                 var singleCategory = System.Text.Json.JsonSerializer.Deserialize<CategoryDto>(
                     body.ToString(),
                     new System.Text.Json.JsonSerializerOptions { PropertyNameCaseInsensitive = true });
@@ -95,18 +97,19 @@ namespace Backend.Controllers
                     var category = new Category
                     {
                         Name = singleCategory.Name,
-                        Description = singleCategory.Description
+                        Description = singleCategory.Description,
+                        Image = singleCategory.Image
                     };
 
                     _context.Categories.Add(category);
                     await _context.SaveChangesAsync();
 
-                    // Return the created category as a DTO
                     var createdCategoryDto = new CategoryDto
                     {
                         Id = category.Id,
                         Name = category.Name,
-                        Description = category.Description
+                        Description = category.Description,
+                        Image = category.Image
                     };
 
                     return CreatedAtAction(nameof(GetCategory), new { id = category.Id }, createdCategoryDto);
@@ -116,7 +119,7 @@ namespace Backend.Controllers
 
             try
             {
-                // Try to deserialize into a list of CategoryDto
+                // Try multiple categories
                 var categoryList = System.Text.Json.JsonSerializer.Deserialize<List<CategoryDto>>(
                     body.ToString(),
                     new System.Text.Json.JsonSerializerOptions { PropertyNameCaseInsensitive = true });
@@ -126,7 +129,8 @@ namespace Backend.Controllers
                     var categories = categoryList.Select(c => new Category
                     {
                         Name = c.Name,
-                        Description = c.Description
+                        Description = c.Description,
+                        Image = c.Image
                     }).ToList();
 
                     _context.Categories.AddRange(categories);
@@ -136,7 +140,8 @@ namespace Backend.Controllers
                     {
                         Id = c.Id,
                         Name = c.Name,
-                        Description = c.Description
+                        Description = c.Description,
+                        Image = c.Image
                     }).ToList();
 
                     return Ok(createdDtos);
@@ -147,9 +152,9 @@ namespace Backend.Controllers
             return BadRequest("Invalid category format. Must be a single object or an array of objects.");
         }
 
-        // PUT: api/Category/5
+        // ✅ PUT: api/Category/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateCategory(int id, [FromBody] CategoryDto dto)
+        public async Task<IActionResult> UpdateCategory(int id, [FromBody] CategoryUpdateDto dto)
         {
             if (dto == null || id != dto.Id)
                 return BadRequest("Invalid request data.");
@@ -160,6 +165,7 @@ namespace Backend.Controllers
 
             category.Name = dto.Name;
             category.Description = dto.Description;
+            category.Image = dto.Image;
 
             _context.Entry(category).State = EntityState.Modified;
             await _context.SaveChangesAsync();
