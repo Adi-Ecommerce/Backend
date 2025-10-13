@@ -1,6 +1,7 @@
 ﻿using Backend.Data;
 using Backend.Model.Entities;
 using Backend.Models;
+using Backend.Models.DTOs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -20,13 +21,24 @@ namespace Backend.Controllers
             _context = context;
         }
 
-        // 🛒 Add item to cart
+        // 🛒 Add to Cart with validation
         [HttpPost("add")]
-        public async Task<IActionResult> AddToCart(int productId, int quantity)
+        public async Task<IActionResult> AddToCart([FromBody] AddToCartDto dto)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (userId == null)
-                return Unauthorized();
+                return Unauthorized(new ApiResponse<string> { Success = false, Message = "Unauthorized" });
+
+            if (dto.Quantity <= 0)
+                return BadRequest(new ApiResponse<string> { Success = false, Message = "Quantity must be greater than 0." });
+
+            var product = await _context.Products.FindAsync(dto.ProductId);
+            if (product == null)
+                return NotFound(new ApiResponse<string> { Success = false, Message = "Product not found." });
+
+            // Optional: validate stock if you track it
+            // if (product.StockQuantity < dto.Quantity)
+            //     return BadRequest(new ApiResponse<string> { Success = false, Message = "Insufficient stock." });
 
             var cart = await _context.Carts
                 .Include(c => c.CartItems)
@@ -39,15 +51,35 @@ namespace Backend.Controllers
                 _context.Carts.Add(cart);
             }
 
-            var existingItem = cart.CartItems.FirstOrDefault(ci => ci.ProductId == productId);
+            var existingItem = cart.CartItems.FirstOrDefault(ci => ci.ProductId == dto.ProductId);
             if (existingItem != null)
-                existingItem.Quantity += quantity;
+                existingItem.Quantity += dto.Quantity;
             else
-                cart.CartItems.Add(new CartItem { ProductId = productId, Quantity = quantity });
+                cart.CartItems.Add(new CartItem { ProductId = dto.ProductId, Quantity = dto.Quantity });
 
             await _context.SaveChangesAsync();
 
-            return Ok(new { message = "Item added to cart successfully!" });
+            var updatedCart = await _context.Carts
+                .Include(c => c.CartItems)
+                .ThenInclude(ci => ci.Product)
+                .FirstOrDefaultAsync(c => c.UserId == userId);
+
+            var cartData = updatedCart.CartItems.Select(ci => new
+            {
+                ci.Id,
+                ProductId = ci.ProductId,
+                Product = ci.Product?.Name,
+                ci.Quantity,
+                Price = ci.Product?.Price,
+                ci.TotalPrice
+            });
+
+            return Ok(new ApiResponse<object>
+            {
+                Success = true,
+                Message = "Item added successfully!",
+                Data = cartData
+            });
         }
 
         // 🧾 Get all items in cart
@@ -56,7 +88,7 @@ namespace Backend.Controllers
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (userId == null)
-                return Unauthorized();
+                return Unauthorized(new ApiResponse<string> { Success = false, Message = "Unauthorized" });
 
             var cart = await _context.Carts
                 .Include(c => c.CartItems)
@@ -64,82 +96,90 @@ namespace Backend.Controllers
                 .FirstOrDefaultAsync(c => c.UserId == userId);
 
             if (cart == null || !cart.CartItems.Any())
-                return Ok(new { message = "Your cart is empty." });
+                return Ok(new ApiResponse<string> { Success = true, Message = "Your cart is empty." });
 
             var cartDetails = cart.CartItems.Select(ci => new
             {
+                ci.Id,
+                ProductId = ci.ProductId,
                 Product = ci.Product?.Name,
                 ci.Quantity,
                 Price = ci.Product?.Price,
                 ci.TotalPrice
             });
 
-            return Ok(cartDetails);
+            return Ok(new ApiResponse<object> { Success = true, Message = "Cart retrieved successfully.", Data = cartDetails });
         }
 
-        // 💳 View checkout summary
-        [HttpGet("checkout")]
-        public async Task<IActionResult> Checkout()
+        // 🧮 Update quantity
+        [HttpPut("update/{cartItemId}")]
+        public async Task<IActionResult> UpdateQuantity(int cartItemId, [FromBody] UpdateQuantityDto dto)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (userId == null)
-                return Unauthorized();
+                return Unauthorized(new ApiResponse<string> { Success = false, Message = "Unauthorized" });
 
-            var cart = await _context.Carts
-                .Include(c => c.CartItems)
+            var cartItem = await _context.CartItems
+                .Include(ci => ci.Cart)
+                .ThenInclude(c => c.CartItems)
                 .ThenInclude(ci => ci.Product)
-                .FirstOrDefaultAsync(c => c.UserId == userId);
+                .FirstOrDefaultAsync(ci => ci.Id == cartItemId);
 
-            if (cart == null || !cart.CartItems.Any())
-                return Ok(new { message = "Cart is empty." });
+            if (cartItem == null || cartItem.Cart.UserId != userId)
+                return NotFound(new ApiResponse<string> { Success = false, Message = "Cart item not found." });
 
-            var total = cart.CartItems.Sum(ci => ci.TotalPrice);
+            if (dto.Quantity <= 0)
+                return BadRequest(new ApiResponse<string> { Success = false, Message = "Quantity must be greater than 0." });
 
-            return Ok(new
+            cartItem.Quantity = dto.Quantity;
+            await _context.SaveChangesAsync();
+
+            return Ok(new ApiResponse<object>
             {
-                Items = cart.CartItems.Select(ci => new
+                Success = true,
+                Message = "Quantity updated successfully.",
+                Data = new
                 {
-                    Product = ci.Product?.Name,
-                    ci.Quantity,
-                    Price = ci.Product?.Price,
-                    ci.TotalPrice
-                }),
-                Total = total
+                    cartItem.Id,
+                    Product = cartItem.Product?.Name,
+                    cartItem.Quantity,
+                    cartItem.TotalPrice
+                }
             });
         }
 
-        // 🗑️ Remove item from cart
+        // 🗑️ Remove item
         [HttpDelete("remove/{productId}")]
         public async Task<IActionResult> RemoveFromCart(int productId)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (userId == null)
-                return Unauthorized();
+                return Unauthorized(new ApiResponse<string> { Success = false, Message = "Unauthorized" });
 
             var cart = await _context.Carts
                 .Include(c => c.CartItems)
                 .FirstOrDefaultAsync(c => c.UserId == userId);
 
             if (cart == null)
-                return NotFound(new { message = "Cart not found." });
+                return NotFound(new ApiResponse<string> { Success = false, Message = "Cart not found." });
 
             var item = cart.CartItems.FirstOrDefault(ci => ci.ProductId == productId);
             if (item == null)
-                return NotFound(new { message = "Item not found in your cart." });
+                return NotFound(new ApiResponse<string> { Success = false, Message = "Item not found in your cart." });
 
             cart.CartItems.Remove(item);
             await _context.SaveChangesAsync();
 
-            return Ok(new { message = "Item removed successfully." });
+            return Ok(new ApiResponse<string> { Success = true, Message = "Item removed successfully." });
         }
 
-        // ✅ Confirm checkout (clear cart)
+        // ✅ Checkout
         [HttpPost("checkout/confirm")]
         public async Task<IActionResult> ConfirmCheckout()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (userId == null)
-                return Unauthorized();
+                return Unauthorized(new ApiResponse<string> { Success = false, Message = "Unauthorized" });
 
             var cart = await _context.Carts
                 .Include(c => c.CartItems)
@@ -147,19 +187,17 @@ namespace Backend.Controllers
                 .FirstOrDefaultAsync(c => c.UserId == userId);
 
             if (cart == null || !cart.CartItems.Any())
-                return Ok(new { message = "Cart is empty." });
+                return Ok(new ApiResponse<string> { Success = true, Message = "Cart is empty." });
 
             var total = cart.CartItems.Sum(ci => ci.TotalPrice);
-
-            // (Optional) You could save an Order record here
-
-            _context.CartItems.RemoveRange(cart.CartItems); // Clear the cart
+            _context.CartItems.RemoveRange(cart.CartItems);
             await _context.SaveChangesAsync();
 
-            return Ok(new
+            return Ok(new ApiResponse<object>
             {
-                message = "Checkout successful! Your cart has been cleared.",
-                totalPaid = total
+                Success = true,
+                Message = "Checkout successful! Cart cleared.",
+                Data = new { totalPaid = total }
             });
         }
     }
