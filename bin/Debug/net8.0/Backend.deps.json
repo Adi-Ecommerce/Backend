@@ -16,6 +16,7 @@
           "Microsoft.EntityFrameworkCore.Design": "9.0.9",
           "Microsoft.EntityFrameworkCore.SqlServer": "9.0.9",
           "Microsoft.EntityFrameworkCore.Tools": "9.0.9",
+          "Optivem.Framework.Infrastructure.FluentValidation": "1.0.23",
           "Swashbuckle.AspNetCore": "6.6.2",
           "System.IdentityModel.Tokens.Jwt": "8.14.0"
         },
@@ -63,6 +64,17 @@
           "lib/net6.0/BCrypt.Net-Next.dll": {
             "assemblyVersion": "4.0.3.0",
             "fileVersion": "4.0.3.0"
+          }
+        }
+      },
+      "FluentValidation/8.6.1": {
+        "dependencies": {
+          "System.ComponentModel.Annotations": "4.4.1"
+        },
+        "runtime": {
+          "lib/netstandard2.0/FluentValidation.dll": {
+            "assemblyVersion": "8.0.0.0",
+            "fileVersion": "8.6.1.0"
           }
         }
       },
@@ -790,6 +802,68 @@
           }
         }
       },
+      "Optivem.Framework.Core.All/1.0.23": {
+        "dependencies": {
+          "Optivem.Framework.Core.Application": "1.0.23",
+          "Optivem.Framework.Core.Application.Interface": "1.0.23",
+          "Optivem.Framework.Core.Common": "1.0.23",
+          "Optivem.Framework.Core.Domain": "1.0.23"
+        },
+        "runtime": {
+          "lib/netstandard2.1/Optivem.Framework.Core.All.dll": {
+            "assemblyVersion": "1.0.23.0",
+            "fileVersion": "1.0.23.0"
+          }
+        }
+      },
+      "Optivem.Framework.Core.Application/1.0.23": {
+        "dependencies": {
+          "Optivem.Framework.Core.Application.Interface": "1.0.23",
+          "Optivem.Framework.Core.Domain": "1.0.23"
+        },
+        "runtime": {
+          "lib/netstandard2.1/Optivem.Framework.Core.Application.dll": {
+            "assemblyVersion": "1.0.23.0",
+            "fileVersion": "1.0.23.0"
+          }
+        }
+      },
+      "Optivem.Framework.Core.Application.Interface/1.0.23": {
+        "runtime": {
+          "lib/netstandard2.1/Optivem.Framework.Core.Application.Interface.dll": {
+            "assemblyVersion": "1.0.23.0",
+            "fileVersion": "1.0.23.0"
+          }
+        }
+      },
+      "Optivem.Framework.Core.Common/1.0.23": {
+        "runtime": {
+          "lib/netstandard2.1/Optivem.Framework.Core.Common.dll": {
+            "assemblyVersion": "1.0.23.0",
+            "fileVersion": "1.0.23.0"
+          }
+        }
+      },
+      "Optivem.Framework.Core.Domain/1.0.23": {
+        "runtime": {
+          "lib/netstandard2.1/Optivem.Framework.Core.Domain.dll": {
+            "assemblyVersion": "1.0.23.0",
+            "fileVersion": "1.0.23.0"
+          }
+        }
+      },
+      "Optivem.Framework.Infrastructure.FluentValidation/1.0.23": {
+        "dependencies": {
+          "FluentValidation": "8.6.1",
+          "Optivem.Framework.Core.All": "1.0.23"
+        },
+        "runtime": {
+          "lib/netstandard2.1/Optivem.Framework.Infrastructure.FluentValidation.dll": {
+            "assemblyVersion": "1.0.23.0",
+            "fileVersion": "1.0.23.0"
+          }
+        }
+      },
       "Swashbuckle.AspNetCore/6.6.2": {
         "dependencies": {
           "Microsoft.Extensions.ApiDescription.Server": "6.0.5",
@@ -849,6 +923,7 @@
         }
       },
       "System.Collections.Immutable/7.0.0": {},
+      "System.ComponentModel.Annotations/4.4.1": {},
       "System.Composition/7.0.0": {
         "dependencies": {
           "System.Composition.AttributedModel": "7.0.0",
@@ -1138,6 +1213,13 @@
       "sha512": "sha512-W+U9WvmZQgi5cX6FS5GDtDoPzUCV4LkBLkywq/kRZhuDwcbavOzcDAr3LXJFqHUi952Yj3LEYoWW0jbEUQChsA==",
       "path": "bcrypt.net-next/4.0.3",
       "hashPath": "bcrypt.net-next.4.0.3.nupkg.sha512"
+    },
+    "FluentValidation/8.6.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-g0xw/YCVgJ1IYpBgKF9iuci/Arf6Dsq9H/WeeT9zaBpjrEA+Cr2GjWXHu1F0DKqVzp4J4hta4gGrRt6H4aESqQ==",
+      "path": "fluentvalidation/8.6.1",
+      "hashPath": "fluentvalidation.8.6.1.nupkg.sha512"
     },
     "Humanizer.Core/2.14.1": {
       "type": "package",
@@ -1454,6 +1536,48 @@
       "path": "newtonsoft.json/13.0.3",
       "hashPath": "newtonsoft.json.13.0.3.nupkg.sha512"
     },
+    "Optivem.Framework.Core.All/1.0.23": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Dg2qbgsFXpx7I6e0qk9aorwacjxe+H4HH3QQEzL5xTVFuzcvfDlmfNNfuXcNZmkoJWiW0kSqY0DoYcOjsXgfQg==",
+      "path": "optivem.framework.core.all/1.0.23",
+      "hashPath": "optivem.framework.core.all.1.0.23.nupkg.sha512"
+    },
+    "Optivem.Framework.Core.Application/1.0.23": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ml/7xXWubBoDfHETKt0eSiselY41Ihx+hUyzKyXbvBHxDLHBBvAR4J4cLTIt+kGJxn7XXVC7DZBfW106nXAcYQ==",
+      "path": "optivem.framework.core.application/1.0.23",
+      "hashPath": "optivem.framework.core.application.1.0.23.nupkg.sha512"
+    },
+    "Optivem.Framework.Core.Application.Interface/1.0.23": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-t1o/xeZtkvPXqcuVROnvU7ToCbEPEq3sVAcpgr56YS7IPpuYBy3/pQnRKGYAx62KR5RBpolKpA0PjeAFmVDrCQ==",
+      "path": "optivem.framework.core.application.interface/1.0.23",
+      "hashPath": "optivem.framework.core.application.interface.1.0.23.nupkg.sha512"
+    },
+    "Optivem.Framework.Core.Common/1.0.23": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-d74Q91ZxWJpdyWqQf0WnmEX7Rcu+FWMyJlv/ZTPnq9PCNGnBPkXDyD2xQymnlmr8ymUyAvRNfX/OQ06WdtYVyg==",
+      "path": "optivem.framework.core.common/1.0.23",
+      "hashPath": "optivem.framework.core.common.1.0.23.nupkg.sha512"
+    },
+    "Optivem.Framework.Core.Domain/1.0.23": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-om7j5+k3Qxx5UdoVAp2Rnd0f5GoIQcBZzaIYAk90dYnDZLG5kwz0iOhHeLUUsB/0/A/RKgFD+SW+Z7vtkYy0pg==",
+      "path": "optivem.framework.core.domain/1.0.23",
+      "hashPath": "optivem.framework.core.domain.1.0.23.nupkg.sha512"
+    },
+    "Optivem.Framework.Infrastructure.FluentValidation/1.0.23": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-kaKk6tPpNIVxPoPG4r58rSp/bs9JYa2pi/YRfKqTe3JQge9OBXDeJ1fZiLdqMpQJHg1Si6r/Kk5VKwVNfWwmCw==",
+      "path": "optivem.framework.infrastructure.fluentvalidation/1.0.23",
+      "hashPath": "optivem.framework.infrastructure.fluentvalidation.1.0.23.nupkg.sha512"
+    },
     "Swashbuckle.AspNetCore/6.6.2": {
       "type": "package",
       "serviceable": true,
@@ -1502,6 +1626,13 @@
       "sha512": "sha512-dQPcs0U1IKnBdRDBkrCTi1FoajSTBzLcVTpjO4MBCMC7f4pDOIPzgBoX8JjG7X6uZRJ8EBxsi8+DR1JuwjnzOQ==",
       "path": "system.collections.immutable/7.0.0",
       "hashPath": "system.collections.immutable.7.0.0.nupkg.sha512"
+    },
+    "System.ComponentModel.Annotations/4.4.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ToiYqSCioqhtspq2O/jYKtyTC/T0uwWHBTYlzCi6PRbSSHArN1IaRWeHffDamvms5sye5FDUWCfNZgubQpNRsA==",
+      "path": "system.componentmodel.annotations/4.4.1",
+      "hashPath": "system.componentmodel.annotations.4.4.1.nupkg.sha512"
     },
     "System.Composition/7.0.0": {
       "type": "package",

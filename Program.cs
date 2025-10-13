@@ -76,12 +76,12 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-// ✅ Use developer-friendly error pages if in Dev or Docker
+//  Use developer-friendly error pages if in Dev or Docker
 if (app.Environment.IsDevelopment() || app.Environment.EnvironmentName == "Docker")
 {
     app.UseDeveloperExceptionPage();
 
-    // ✅ Enable Swagger only in Dev/Docker
+    //  Enable Swagger only in Dev/Docker
     app.UseSwagger();
     app.UseSwaggerUI(c =>
     {
@@ -96,7 +96,7 @@ else
     // app.UseSwaggerUI();
 }
 
-// ✅ Middleware order (IMPORTANT)
+//  Middleware order (IMPORTANT)
 app.UseHttpsRedirection();
 app.UseCors("AllowFrontend");
 app.UseAuthentication();
