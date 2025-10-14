@@ -49,15 +49,14 @@ namespace Backend.Controllers
         [HttpPost("add")]
         public async Task<IActionResult> AddToCart([FromBody] AddToCartRequest request)
         {
-            // Validate request
             if (request == null || request.ProductId <= 0 || request.Quantity <= 0)
                 return BadRequest(CreateResponse(false, "Invalid product ID or quantity"));
 
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            // ✅ Updated claim access
+            var userId = User.FindFirst("userId")?.Value;
             if (userId == null)
                 return Unauthorized(CreateResponse(false, "Unauthorized"));
 
-            // Validate product exists and has stock
             var product = await _context.Products.FindAsync(request.ProductId);
             if (product == null)
                 return NotFound(CreateResponse(false, "Product not found"));
@@ -65,7 +64,6 @@ namespace Backend.Controllers
             if (product.StockQuantity < request.Quantity)
                 return BadRequest(CreateResponse(false, $"Insufficient stock. Only {product.StockQuantity} available"));
 
-            // Get or create cart
             var cart = await _context.Carts
                 .Include(c => c.CartItems)
                 .ThenInclude(ci => ci.Product)
@@ -77,7 +75,6 @@ namespace Backend.Controllers
                 _context.Carts.Add(cart);
             }
 
-            // Check for existing item and update or add
             var existingItem = cart.CartItems.FirstOrDefault(ci => ci.ProductId == request.ProductId);
             if (existingItem != null)
             {
@@ -92,7 +89,6 @@ namespace Backend.Controllers
 
             await _context.SaveChangesAsync();
 
-            // Reload to get updated data
             cart = await _context.Carts
                 .Include(c => c.CartItems)
                 .ThenInclude(ci => ci.Product)
@@ -106,7 +102,7 @@ namespace Backend.Controllers
         [HttpGet]
         public async Task<IActionResult> GetCart()
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var userId = User.FindFirst("userId")?.Value;
             if (userId == null)
                 return Unauthorized(CreateResponse(false, "Unauthorized"));
 
@@ -126,7 +122,7 @@ namespace Backend.Controllers
         [HttpGet("checkout")]
         public async Task<IActionResult> Checkout()
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var userId = User.FindFirst("userId")?.Value;
             if (userId == null)
                 return Unauthorized(CreateResponse(false, "Unauthorized"));
 
@@ -150,14 +146,14 @@ namespace Backend.Controllers
             return Ok(CreateResponse(true, "Checkout summary retrieved", summaryData));
         }
 
-        //  Remove item from cart
+        // Remove item from cart
         [HttpDelete("remove/{productId}")]
         public async Task<IActionResult> RemoveFromCart(int productId)
         {
             if (productId <= 0)
                 return BadRequest(CreateResponse(false, "Invalid product ID"));
 
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var userId = User.FindFirst("userId")?.Value;
             if (userId == null)
                 return Unauthorized(CreateResponse(false, "Unauthorized"));
 
@@ -176,19 +172,18 @@ namespace Backend.Controllers
             cart.CartItems.Remove(item);
             await _context.SaveChangesAsync();
 
-            // Return updated cart or empty list
             var cartData = cart.CartItems.Any() ? GetCartData(cart) : new List<object>();
             return Ok(CreateResponse(true, "Item removed successfully", cartData));
         }
 
-        // ✏ Update item quantity
+        // Update item quantity
         [HttpPut("update/{cartItemId}")]
         public async Task<IActionResult> UpdateQuantity(int cartItemId, [FromBody] UpdateQuantityRequest request)
         {
             if (cartItemId <= 0 || request == null || request.Quantity <= 0)
                 return BadRequest(CreateResponse(false, "Invalid cart item ID or quantity"));
 
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var userId = User.FindFirst("userId")?.Value;
             if (userId == null)
                 return Unauthorized(CreateResponse(false, "Unauthorized"));
 
@@ -200,14 +195,12 @@ namespace Backend.Controllers
             if (cartItem == null || cartItem.Cart.UserId != userId)
                 return NotFound(CreateResponse(false, "Cart item not found"));
 
-            // Validate stock
             if (cartItem.Product.StockQuantity < request.Quantity)
                 return BadRequest(CreateResponse(false, $"Insufficient stock. Only {cartItem.Product.StockQuantity} available"));
 
             cartItem.Quantity = request.Quantity;
             await _context.SaveChangesAsync();
 
-            // Get updated cart
             var cart = await _context.Carts
                 .Include(c => c.CartItems)
                 .ThenInclude(ci => ci.Product)
@@ -217,11 +210,11 @@ namespace Backend.Controllers
             return Ok(CreateResponse(true, "Quantity updated successfully", cartData));
         }
 
-        // ✅ Confirm checkout (clear cart)
+        // Confirm checkout (clear cart)
         [HttpPost("checkout/confirm")]
         public async Task<IActionResult> ConfirmCheckout()
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var userId = User.FindFirst("userId")?.Value;
             if (userId == null)
                 return Unauthorized(CreateResponse(false, "Unauthorized"));
 
@@ -233,15 +226,9 @@ namespace Backend.Controllers
             if (cart == null || !cart.CartItems.Any())
                 return Ok(CreateResponse(true, "Cart is already empty", null));
 
-            // 🔧 FIX: Calculate totals BEFORE removing items
             var total = cart.CartItems.Sum(ci => ci.TotalPrice);
             var itemsCount = cart.CartItems.Count;
 
-            // Optional: Save order record here before clearing cart
-            // var order = new Order { UserId = userId, Total = total, ... };
-            // _context.Orders.Add(order);
-
-            // Now remove items
             _context.CartItems.RemoveRange(cart.CartItems);
             await _context.SaveChangesAsync();
 

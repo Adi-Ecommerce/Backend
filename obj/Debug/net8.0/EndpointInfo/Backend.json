@@ -14,17 +14,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/AddToCartDto"
+                "$ref": "#/components/schemas/AddToCartRequest"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/AddToCartDto"
+                "$ref": "#/components/schemas/AddToCartRequest"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/AddToCartDto"
+                "$ref": "#/components/schemas/AddToCartRequest"
               }
             }
           }
@@ -40,6 +40,41 @@
       "get": {
         "tags": [
           "Cart"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Cart/checkout": {
+      "get": {
+        "tags": [
+          "Cart"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Cart/remove/{productId}": {
+      "delete": {
+        "tags": [
+          "Cart"
+        ],
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
         ],
         "responses": {
           "200": {
@@ -68,44 +103,21 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateQuantityDto"
+                "$ref": "#/components/schemas/UpdateQuantityRequest"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateQuantityDto"
+                "$ref": "#/components/schemas/UpdateQuantityRequest"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateQuantityDto"
+                "$ref": "#/components/schemas/UpdateQuantityRequest"
               }
             }
           }
         },
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/Cart/remove/{productId}": {
-      "delete": {
-        "tags": [
-          "Cart"
-        ],
-        "parameters": [
-          {
-            "name": "productId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -652,7 +664,7 @@
   },
   "components": {
     "schemas": {
-      "AddToCartDto": {
+      "AddToCartRequest": {
         "type": "object",
         "properties": {
           "productId": {
@@ -878,7 +890,7 @@
         },
         "additionalProperties": false
       },
-      "UpdateQuantityDto": {
+      "UpdateQuantityRequest": {
         "type": "object",
         "properties": {
           "quantity": {

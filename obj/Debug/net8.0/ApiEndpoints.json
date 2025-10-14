@@ -18,11 +18,21 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "dto",
-        "Type": "Backend.Models.DTOs.AddToCartDto",
+        "Name": "request",
+        "Type": "Backend.Controllers.AddToCartRequest",
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.CartController",
+    "Method": "Checkout",
+    "RelativePath": "api/Cart/checkout",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {
@@ -65,8 +75,8 @@
         "IsRequired": true
       },
       {
-        "Name": "dto",
-        "Type": "Backend.Models.DTOs.UpdateQuantityDto",
+        "Name": "request",
+        "Type": "Backend.Controllers.UpdateQuantityRequest",
         "IsRequired": true
       }
     ],
