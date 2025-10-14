@@ -1,4 +1,9 @@
-﻿using System;
+﻿using Backend.Model.Entities;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
+using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -25,11 +30,11 @@ namespace Backend.Services
             // 2. Create signing credentials
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-            // 3. Define claims (info stored in token)
+            // 3. Define claims using standard ClaimTypes
             var claims = new[]
             {
-                new Claim("userId", user.Id.ToString()),
-                new Claim("email", user.Email)
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new Claim(ClaimTypes.Email, user.Email)
             };
 
             // 4. Build token
