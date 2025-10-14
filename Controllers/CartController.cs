@@ -148,7 +148,7 @@ namespace Backend.Controllers
             });
         }
 
-        // 🗑️ Remove item
+        //  Remove item
         [HttpDelete("remove/{productId}")]
         public async Task<IActionResult> RemoveFromCart(int productId)
         {
@@ -173,7 +173,7 @@ namespace Backend.Controllers
             return Ok(new ApiResponse<string> { Success = true, Message = "Item removed successfully." });
         }
 
-        // ✅ Checkout
+        //  Checkout
         [HttpPost("checkout/confirm")]
         public async Task<IActionResult> ConfirmCheckout()
         {
