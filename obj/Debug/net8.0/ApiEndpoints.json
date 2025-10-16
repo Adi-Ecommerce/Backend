@@ -19,7 +19,7 @@
     "Parameters": [
       {
         "Name": "request",
-        "Type": "Backend.Controllers.AddToCartRequest",
+        "Type": "Backend.Models.DTOs.AddToCartDto",
         "IsRequired": true
       }
     ],
@@ -76,7 +76,7 @@
       },
       {
         "Name": "request",
-        "Type": "Backend.Controllers.UpdateQuantityRequest",
+        "Type": "Backend.Models.DTOs.UpdateQuantityDto",
         "IsRequired": true
       }
     ],

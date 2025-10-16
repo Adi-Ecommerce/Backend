@@ -1,6 +1,6 @@
 ﻿using Backend.Data;
-using Backend.Model.Entities;
 using Backend.Models;
+using Backend.Models.DTOs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -20,18 +20,12 @@ namespace Backend.Controllers
             _context = context;
         }
 
-        // Helper method to create standardized response
         private object CreateResponse(bool success, string message, object data = null)
         {
-            return new
-            {
-                success,
-                message,
-                data
-            };
+            return new { success, message, data };
         }
 
-        // Helper method to get cart data for response
+        // Helper: now includes image
         private List<object> GetCartData(Cart cart)
         {
             return cart.CartItems.Select(ci => new
@@ -39,15 +33,15 @@ namespace Backend.Controllers
                 id = ci.Id,
                 productId = ci.ProductId,
                 product = ci.Product?.Name,
+                image = ci.Product?.Image, // 🖼️ Include image
                 quantity = ci.Quantity,
                 price = ci.Product?.Price,
                 totalPrice = ci.TotalPrice
             }).Cast<object>().ToList();
         }
 
-        // 🛒 Add item to cart
         [HttpPost("add")]
-        public async Task<IActionResult> AddToCart([FromBody] AddToCartRequest request)
+        public async Task<IActionResult> AddToCart([FromBody] AddToCartDto request)
         {
             try
             {
@@ -63,7 +57,7 @@ namespace Backend.Controllers
                     return NotFound(CreateResponse(false, "Product not found"));
 
                 if (product.StockQuantity < request.Quantity)
-                    return BadRequest(CreateResponse(false, $"Insufficient stock. Only {product.StockQuantity} available"));
+                    return BadRequest(CreateResponse(false, $"Only {product.StockQuantity} left in stock"));
 
                 var cart = await _context.Carts
                     .Include(c => c.CartItems)
@@ -80,7 +74,7 @@ namespace Backend.Controllers
                 if (existingItem != null)
                 {
                     if (product.StockQuantity < existingItem.Quantity + request.Quantity)
-                        return BadRequest(CreateResponse(false, "Cannot add more items. Insufficient stock"));
+                        return BadRequest(CreateResponse(false, "Not enough stock"));
                     existingItem.Quantity += request.Quantity;
                 }
                 else
@@ -90,209 +84,141 @@ namespace Backend.Controllers
 
                 await _context.SaveChangesAsync();
 
-                // Reload cart with products
                 cart = await _context.Carts
                     .Include(c => c.CartItems)
                     .ThenInclude(ci => ci.Product)
                     .FirstOrDefaultAsync(c => c.UserId == userId);
 
                 var cartData = GetCartData(cart);
-                return Ok(CreateResponse(true, "Item added to cart successfully!", cartData));
+                return Ok(CreateResponse(true, "Item added successfully", cartData));
             }
             catch (Exception ex)
             {
-                return StatusCode(500, CreateResponse(false, $"Internal Server Error: {ex.Message}"));
+                return StatusCode(500, CreateResponse(false, ex.Message));
             }
         }
 
-        // 🧾 Get all items in cart
         [HttpGet]
         public async Task<IActionResult> GetCart()
         {
-            try
-            {
-                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-                if (userId == null)
-                    return Unauthorized(CreateResponse(false, "Unauthorized"));
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userId == null)
+                return Unauthorized(CreateResponse(false, "Unauthorized"));
 
-                var cart = await _context.Carts
-                    .Include(c => c.CartItems)
-                    .ThenInclude(ci => ci.Product)
-                    .FirstOrDefaultAsync(c => c.UserId == userId);
+            var cart = await _context.Carts
+                .Include(c => c.CartItems)
+                .ThenInclude(ci => ci.Product)
+                .FirstOrDefaultAsync(c => c.UserId == userId);
 
-                if (cart == null || !cart.CartItems.Any())
-                    return Ok(CreateResponse(true, "Your cart is empty", new List<object>()));
+            if (cart == null || !cart.CartItems.Any())
+                return Ok(CreateResponse(true, "Your cart is empty", new List<object>()));
 
-                var cartData = GetCartData(cart);
-                return Ok(CreateResponse(true, "Cart retrieved successfully", cartData));
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, CreateResponse(false, $"Internal Server Error: {ex.Message}"));
-            }
+            var cartData = GetCartData(cart);
+            return Ok(CreateResponse(true, "Cart retrieved successfully", cartData));
         }
 
-        // 💳 Checkout summary
         [HttpGet("checkout")]
         public async Task<IActionResult> Checkout()
         {
-            try
-            {
-                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-                if (userId == null)
-                    return Unauthorized(CreateResponse(false, "Unauthorized"));
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userId == null)
+                return Unauthorized(CreateResponse(false, "Unauthorized"));
 
-                var cart = await _context.Carts
-                    .Include(c => c.CartItems)
-                    .ThenInclude(ci => ci.Product)
-                    .FirstOrDefaultAsync(c => c.UserId == userId);
+            var cart = await _context.Carts
+                .Include(c => c.CartItems)
+                .ThenInclude(ci => ci.Product)
+                .FirstOrDefaultAsync(c => c.UserId == userId);
 
-                if (cart == null || !cart.CartItems.Any())
-                    return Ok(CreateResponse(true, "Cart is empty", new { items = new List<object>(), total = 0 }));
+            if (cart == null || !cart.CartItems.Any())
+                return Ok(CreateResponse(true, "Cart is empty", new { items = new List<object>(), total = 0 }));
 
-                var total = cart.CartItems.Sum(ci => ci.TotalPrice);
-                var cartItems = GetCartData(cart);
+            var total = cart.CartItems.Sum(ci => ci.TotalPrice);
+            var cartItems = GetCartData(cart);
 
-                var summaryData = new
-                {
-                    items = cartItems,
-                    total = total
-                };
-
-                return Ok(CreateResponse(true, "Checkout summary retrieved", summaryData));
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, CreateResponse(false, $"Internal Server Error: {ex.Message}"));
-            }
+            return Ok(CreateResponse(true, "Checkout summary retrieved", new { items = cartItems, total }));
         }
 
-        // Remove item
         [HttpDelete("remove/{productId}")]
         public async Task<IActionResult> RemoveFromCart(int productId)
         {
-            try
-            {
-                if (productId <= 0)
-                    return BadRequest(CreateResponse(false, "Invalid product ID"));
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userId == null)
+                return Unauthorized(CreateResponse(false, "Unauthorized"));
 
-                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-                if (userId == null)
-                    return Unauthorized(CreateResponse(false, "Unauthorized"));
+            var cart = await _context.Carts
+                .Include(c => c.CartItems)
+                .ThenInclude(ci => ci.Product)
+                .FirstOrDefaultAsync(c => c.UserId == userId);
 
-                var cart = await _context.Carts
-                    .Include(c => c.CartItems)
-                    .ThenInclude(ci => ci.Product)
-                    .FirstOrDefaultAsync(c => c.UserId == userId);
+            if (cart == null)
+                return NotFound(CreateResponse(false, "Cart not found"));
 
-                if (cart == null)
-                    return NotFound(CreateResponse(false, "Cart not found"));
+            var item = cart.CartItems.FirstOrDefault(ci => ci.ProductId == productId);
+            if (item == null)
+                return NotFound(CreateResponse(false, "Item not found in your cart"));
 
-                var item = cart.CartItems.FirstOrDefault(ci => ci.ProductId == productId);
-                if (item == null)
-                    return NotFound(CreateResponse(false, "Item not found in your cart"));
+            cart.CartItems.Remove(item);
+            await _context.SaveChangesAsync();
 
-                cart.CartItems.Remove(item);
-                await _context.SaveChangesAsync();
-
-                var cartData = cart.CartItems.Any() ? GetCartData(cart) : new List<object>();
-                return Ok(CreateResponse(true, "Item removed successfully", cartData));
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, CreateResponse(false, $"Internal Server Error: {ex.Message}"));
-            }
+            var cartData = GetCartData(cart);
+            return Ok(CreateResponse(true, "Item removed successfully", cartData));
         }
 
-        // Update quantity
         [HttpPut("update/{cartItemId}")]
-        public async Task<IActionResult> UpdateQuantity(int cartItemId, [FromBody] UpdateQuantityRequest request)
+        public async Task<IActionResult> UpdateQuantity(int cartItemId, [FromBody] UpdateQuantityDto request)
         {
-            try
-            {
-                if (cartItemId <= 0 || request == null || request.Quantity <= 0)
-                    return BadRequest(CreateResponse(false, "Invalid cart item ID or quantity"));
+            if (cartItemId <= 0 || request == null || request.Quantity <= 0)
+                return BadRequest(CreateResponse(false, "Invalid data"));
 
-                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-                if (userId == null)
-                    return Unauthorized(CreateResponse(false, "Unauthorized"));
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userId == null)
+                return Unauthorized(CreateResponse(false, "Unauthorized"));
 
-                var cartItem = await _context.CartItems
-                    .Include(ci => ci.Cart)
-                    .Include(ci => ci.Product)
-                    .FirstOrDefaultAsync(ci => ci.Id == cartItemId);
+            var cartItem = await _context.CartItems
+                .Include(ci => ci.Cart)
+                .Include(ci => ci.Product)
+                .FirstOrDefaultAsync(ci => ci.Id == cartItemId);
 
-                if (cartItem == null || cartItem.Cart.UserId != userId)
-                    return NotFound(CreateResponse(false, "Cart item not found"));
+            if (cartItem == null || cartItem.Cart.UserId != userId)
+                return NotFound(CreateResponse(false, "Cart item not found"));
 
-                if (cartItem.Product.StockQuantity < request.Quantity)
-                    return BadRequest(CreateResponse(false, $"Insufficient stock. Only {cartItem.Product.StockQuantity} available"));
+            if (cartItem.Product.StockQuantity < request.Quantity)
+                return BadRequest(CreateResponse(false, $"Only {cartItem.Product.StockQuantity} available"));
 
-                cartItem.Quantity = request.Quantity;
-                await _context.SaveChangesAsync();
+            cartItem.Quantity = request.Quantity;
+            await _context.SaveChangesAsync();
 
-                var cart = await _context.Carts
-                    .Include(c => c.CartItems)
-                    .ThenInclude(ci => ci.Product)
-                    .FirstOrDefaultAsync(c => c.UserId == userId);
+            var cart = await _context.Carts
+                .Include(c => c.CartItems)
+                .ThenInclude(ci => ci.Product)
+                .FirstOrDefaultAsync(c => c.UserId == userId);
 
-                var cartData = GetCartData(cart);
-                return Ok(CreateResponse(true, "Quantity updated successfully", cartData));
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, CreateResponse(false, $"Internal Server Error: {ex.Message}"));
-            }
+            var cartData = GetCartData(cart);
+            return Ok(CreateResponse(true, "Quantity updated", cartData));
         }
 
-        // Confirm checkout
         [HttpPost("checkout/confirm")]
         public async Task<IActionResult> ConfirmCheckout()
         {
-            try
-            {
-                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-                if (userId == null)
-                    return Unauthorized(CreateResponse(false, "Unauthorized"));
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userId == null)
+                return Unauthorized(CreateResponse(false, "Unauthorized"));
 
-                var cart = await _context.Carts
-                    .Include(c => c.CartItems)
-                    .ThenInclude(ci => ci.Product)
-                    .FirstOrDefaultAsync(c => c.UserId == userId);
+            var cart = await _context.Carts
+                .Include(c => c.CartItems)
+                .ThenInclude(ci => ci.Product)
+                .FirstOrDefaultAsync(c => c.UserId == userId);
 
-                if (cart == null || !cart.CartItems.Any())
-                    return Ok(CreateResponse(true, "Cart is already empty", null));
+            if (cart == null || !cart.CartItems.Any())
+                return Ok(CreateResponse(true, "Cart already empty", null));
 
-                var total = cart.CartItems.Sum(ci => ci.TotalPrice);
-                var itemsCount = cart.CartItems.Count;
+            var total = cart.CartItems.Sum(ci => ci.TotalPrice);
+            var count = cart.CartItems.Count;
 
-                _context.CartItems.RemoveRange(cart.CartItems);
-                await _context.SaveChangesAsync();
+            _context.CartItems.RemoveRange(cart.CartItems);
+            await _context.SaveChangesAsync();
 
-                var checkoutData = new
-                {
-                    totalPaid = total,
-                    itemsCount = itemsCount
-                };
-
-                return Ok(CreateResponse(true, "Checkout successful! Your cart has been cleared.", checkoutData));
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, CreateResponse(false, $"Internal Server Error: {ex.Message}"));
-            }
+            return Ok(CreateResponse(true, "Checkout successful", new { totalPaid = total, itemsCount = count }));
         }
-    }
-
-    // Request DTOs
-    public class AddToCartRequest
-    {
-        public int ProductId { get; set; }
-        public int Quantity { get; set; }
-    }
-
-    public class UpdateQuantityRequest
-    {
-        public int Quantity { get; set; }
     }
 }

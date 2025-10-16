@@ -14,17 +14,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/AddToCartRequest"
+                "$ref": "#/components/schemas/AddToCartDto"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/AddToCartRequest"
+                "$ref": "#/components/schemas/AddToCartDto"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/AddToCartRequest"
+                "$ref": "#/components/schemas/AddToCartDto"
               }
             }
           }
@@ -103,17 +103,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateQuantityRequest"
+                "$ref": "#/components/schemas/UpdateQuantityDto"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateQuantityRequest"
+                "$ref": "#/components/schemas/UpdateQuantityDto"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateQuantityRequest"
+                "$ref": "#/components/schemas/UpdateQuantityDto"
               }
             }
           }
@@ -664,7 +664,7 @@
   },
   "components": {
     "schemas": {
-      "AddToCartRequest": {
+      "AddToCartDto": {
         "type": "object",
         "properties": {
           "productId": {
@@ -890,7 +890,7 @@
         },
         "additionalProperties": false
       },
-      "UpdateQuantityRequest": {
+      "UpdateQuantityDto": {
         "type": "object",
         "properties": {
           "quantity": {
